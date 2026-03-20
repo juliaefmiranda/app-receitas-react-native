@@ -1,45 +1,55 @@
-import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
-import { StyleSheet, Text, View, FlatList, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StatusBar } from "expo-status-bar";
+import { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  FlatList,
+  TextInput,
+  TouchableOpacity,
+  Image,
+} from "react-native";
 
 export default function App() {
-    const [novaReceita, setNovaReceita] = useState('');
+  const [novaReceita, setNovaReceita] = useState("");
 
-    const [listaReceitas, setListaReceitas] = useState([]);
+  const [listaReceitas, setListaReceitas] = useState([]);
 
-    //Função para adicionar receita (spread operator)
-    const adicionarReceita = () => {
-        if (novaReceita.trim() === '') return;
+  //Função para adicionar receita (spread operator)
+  const adicionarReceita = () => {
+    if (novaReceita.trim() === "") return;
 
-        const receitaObjeto = {
-            id: String(Date.now()),
-            texto: novaReceita,
-        };
-
-        //Pega tudo que já tinha lista (...listaReceitas) e joga o novo item no final
-        setListaReceitas([...listaReceitas, receitaObjeto]);
-
-        setNovaReceita('');
+    const receitaObjeto = {
+      id: String(Date.now()),
+      texto: novaReceita,
     };
 
-    //Função para remover receita (filter)
-    const removerReceita = (idParaRemover) => {
-        const listaFiltrada = listaReceitas.filter((item) => item.id !== idParaRemover);
+    //Pega tudo que já tinha lista (...listaReceitas) e joga o novo item no final
+    setListaReceitas([...listaReceitas, receitaObjeto]);
 
-        setListaReceitas(listaFiltrada);
-    };
+    setNovaReceita("");
+  };
 
-    return (
-        <View style={styles.container}>
-            <View style={styles.header}>
-                <Image source={require('./assets/logo.png')} style={styles.logo} />
-                <Text style={styles.textoLogo}>CODE & COOK</Text>
-            </View>
-            <View style={styles.banner}>
-                <Image source={require('./assets/banner.png')} style={styles.banner} />
-            </View>
-            <View style={styles.main}>
-                <Text style={styles.titulo}>Minhas Receitas</Text>
+  //Função para remover receita (filter)
+  const removerReceita = (idParaRemover) => {
+    const listaFiltrada = listaReceitas.filter(
+      (item) => item.id !== idParaRemover,
+    );
+
+    setListaReceitas(listaFiltrada);
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image source={require("./assets/logo.png")} style={styles.logo} />
+        <Text style={styles.textoLogo}>CODE & COOK</Text>
+      </View>
+      <View style={styles.containerBanner}>
+        <Image source={require("./assets/banner.png")} style={styles.banner} />
+      </View>
+      <View style={styles.main}>
+        <Text style={styles.titulo}>Minhas Receitas</Text>
 
         <View style={styles.blocoInputs}>
           <TextInput
