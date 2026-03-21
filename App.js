@@ -122,9 +122,11 @@ export default function App() {
             </View>
           )}
           ListEmptyComponent={() => (
-            <Text style={styles.textoVazio}>
-              Nenhuma receita por aqui! Hora de por a mão na massa 🥨
-            </Text>
+            <View style={styles.containerVazio}>
+              <Text style={styles.textoVazio}>
+                Nenhuma receita por aqui! Hora de por a mão na massa 🥨
+              </Text>
+            </View>
           )}
         />
       </View>
@@ -243,6 +245,7 @@ const styles = StyleSheet.create({
   cardReceita: {
     width: "80%",
     alignSelf: "center",
+    alignItems: "center",
     backgroundColor: "#D78387",
     borderRadius: 15,
     padding: 10,
@@ -269,17 +272,31 @@ const styles = StyleSheet.create({
     flexWrap: "wrap"
   },
   botaoRemover: {
-    marginTop: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 7,
     backgroundColor: "#D78387",
-    borderRadius: 12,
-    paddingVertical: 8,
+    borderRadius: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     alignItems: "center",
-
     borderWidth: 2,
     borderColor: "#ffffff",
   },
   textoBotaoRemover: {
     color: "#ffffff",
     fontWeight: "600",
+  },
+  containerVazio: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
+  textoVazio: {
+    textAlign: "center",
+    color: "#866f70",
+    marginTop: 30,
+    fontSize: 14,
+    fontWeight: "500"
   },
 });
