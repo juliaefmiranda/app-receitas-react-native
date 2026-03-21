@@ -53,22 +53,28 @@ export default function App() {
 
         <View style={styles.blocoInputs}>
           <TextInput
-            style={styles.input}
+            style={styles.inputTitulo}
             placeholder="O que vamos cozinhar hoje?"
+            placeholderTextColor="#949393"
             value={novaReceita}
             onChangeText={setNovaReceita}
+            multiline={true}
           />
           <TextInput
             style={styles.input}
             placeholder="Ingredientes ..."
+            placeholderTextColor="#949393"
             value={novaReceita}
             onChangeText={setNovaReceita}
+            multiline={true}
           />
           <TextInput
             style={styles.input}
             placeholder="Modo de Preparo ..."
+            placeholderTextColor="#949393"
             value={novaReceita}
             onChangeText={setNovaReceita}
+            multiline={true}
           />
           <TouchableOpacity
             style={styles.botaoAdicionar}
@@ -82,9 +88,17 @@ export default function App() {
           data={listaReceitas}
           keyExtractor={(item) => item.id}
           renderItem={({ item }) => (
-            <View style={styles.itemLista}>
-              <Text>{item.texto}</Text>
-              {}
+            <View style={styles.cardReceita}>
+              <View style={styles.blocoBranco}>
+                <Text style={styles.tituloReceita}>{item.titulo}</Text>
+              </View>
+              <View style={styles.blocoBranco}>
+                <Text>{item.ingredientes}</Text>
+              </View>
+              <View style={styles.blocoBranco}>
+                <Text>{item.modoPreparo}</Text>
+              </View>
+
               <TouchableOpacity
                 style={styles.botaoRemover}
                 onPress={() => removerReceita(item.id)}
@@ -123,7 +137,7 @@ const styles = StyleSheet.create({
     objectFit: 'contain'
   },
   textoLogo: {
-    color: '#C5777B',
+    color: '#D78387',
     fontWeight: '600',
   },
   containerBanner: {
@@ -137,5 +151,99 @@ const styles = StyleSheet.create({
     height: 100,
     objectFit: 'cover',
     borderRadius: 15,
+  },
+  main: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: "flex-start"
+  },
+  titulo: {
+    fontSize: 27,
+    color: "#D78387",
+    fontWeight: "600",
+  },
+  blocoInputs: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: "80%",
+    backgroundColor: "#D78387",
+    borderRadius: 15,
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    gap: 10,
+  },
+  inputTitulo: {
+    width: "100%",
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    marginVertical: 5,
+    paddingHorizontal: 15,
+    textAlignVertical: 'top',
+    fontSize: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  input: {
+    width: "90%",
+    height: 50,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    paddingHorizontal: 15,
+    textAlignVertical: 'top',
+    fontSize: 15,
+  },
+
+  botaoAdicionar: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: "#ffffff",
+    borderRadius: 15,
+    margin: 7,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+
+    elevation: 5,
+  },
+  textoBotaoAdicionar: {
+    color: "#D78387",
+    fontWeight: "600",
+  },
+  cardReceita: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: "80%",
+    backgroundColor: "#D78387",
+    borderRadius: 15,
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 20,
+    gap: 10,
+  },
+  blocoBranco: {
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    paddingHorizontal: 15,
+    textAlignVertical: 'top',
+    fontSize: 15,
+  },
+  tituloReceita: {
+    fontWeight: "600",
+    fontSize: 15,
   },
 });
