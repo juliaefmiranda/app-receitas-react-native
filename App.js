@@ -54,69 +54,79 @@ export default function App() {
       <View style={styles.containerBanner}>
         <Image source={require("./assets/banner.png")} style={styles.banner} />
       </View>
-      <View style={styles.main}>
-        <Text style={styles.titulo}>Minhas Receitas</Text>
-
-        <View style={styles.blocoInputs}>
-          <TextInput
-            style={styles.inputTitulo}
-            placeholder="O que vamos cozinhar hoje?"
-            placeholderTextColor="#949393"
-            value={titulo}
-            onChangeText={setTitulo}
-            multiline={true}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Ingredientes ..."
-            placeholderTextColor="#949393"
-            value={ingredientes}
-            onChangeText={setIngredientes}
-            multiline={true}
-          />
-          <TextInput
-            style={styles.input}
-            placeholder="Modo de Preparo ..."
-            placeholderTextColor="#949393"
-            value={modoPreparo}
-            onChangeText={setModoPreparo}
-            multiline={true}
-          />
-          <TouchableOpacity
-            style={styles.botaoAdicionar}
-            onPress={adicionarReceita}
-          >
-            <Text style={styles.textoBotaoAdicionar}>Adicionar receita</Text>
-          </TouchableOpacity>
-        </View>
-
+      <View style={styles.containerFlatList}>
         <FlatList
           data={listaReceitas}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <View style={styles.cardReceita}>
-              <View style={styles.blocoBranco}>
-                <Text style={styles.tituloReceita}>{item.titulo}</Text>
-              </View>
-              <View style={styles.blocoBranco}>
-                <Text>{item.ingredientes}</Text>
-              </View>
-              <View style={styles.blocoBranco}>
-                <Text>{item.modoPreparo}</Text>
-              </View>
 
-              <TouchableOpacity
-                style={styles.botaoRemover}
-                onPress={() => removerReceita(item.id)}
-              >
-                <Text style={styles.textoBotaoRemover}>Remover receita</Text>
-              </TouchableOpacity>
+          ListHeaderComponent={
+            <>
+              <View style={styles.main}>
+                <Text style={styles.titulo}>Minhas Receitas</Text>
+
+                <View style={styles.blocoInputs}>
+                  <TextInput
+                    style={styles.inputTitulo}
+                    placeholder="O que vamos cozinhar hoje?"
+                    placeholderTextColor="#866f70"
+                    value={titulo}
+                    onChangeText={setTitulo}
+                    multiline={true}
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Ingredientes ..."
+                    placeholderTextColor="#866f70"
+                    value={ingredientes}
+                    onChangeText={setIngredientes}
+                    multiline={true}
+                  />
+                  <TextInput
+                    style={styles.input}
+                    placeholder="Modo de Preparo ..."
+                    placeholderTextColor="#866f70"
+                    value={modoPreparo}
+                    onChangeText={setModoPreparo}
+                    multiline={true}
+                  />
+                  <TouchableOpacity
+                    style={styles.botaoAdicionar}
+                    onPress={adicionarReceita}
+                  >
+                    <Text style={styles.textoBotaoAdicionar}>Adicionar receita</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </>
+          }
+          renderItem={({ item }) => (
+            <View style={styles.containerCards}>
+              <View style={styles.cardReceita}>
+                <View style={styles.blocoBranco}>
+                  <Text style={styles.tituloReceita}>{item.titulo}</Text>
+                </View>
+                <View style={styles.blocoBranco}>
+                  <Text style={styles.subtitulos}>{item.ingredientes}</Text>
+                </View>
+                <View style={styles.blocoBranco}>
+                  <Text style={styles.subtitulos}>{item.modoPreparo}</Text>
+                </View>
+
+                <TouchableOpacity
+                  style={styles.botaoRemover}
+                  onPress={() => removerReceita(item.id)}
+                >
+                  <Text style={styles.textoBotaoRemover}>Remover receita</Text>
+                </TouchableOpacity>
+              </View>
             </View>
           )}
           ListEmptyComponent={() => (
-            <Text style={styles.textoVazio}>
-              Nenhuma receita por aqui! Hora de por a mão na massa 🥨
-            </Text>
+            <View style={styles.containerVazio}>
+              <Text style={styles.textoVazio}>
+                Nenhuma receita por aqui! Hora de por a mão na massa 🥨
+              </Text>
+            </View>
           )}
         />
       </View>
@@ -128,6 +138,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+  },
+  containerFlatList: {
+    flex: 1,
+    justifyContent: "flex-start"
   },
   header: {
     justifyContent: 'flex-start',
@@ -159,9 +173,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
   },
   main: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: "flex-start"
+    alignItems: "center",
   },
   titulo: {
     fontSize: 27,
@@ -181,7 +193,7 @@ const styles = StyleSheet.create({
   },
   inputTitulo: {
     width: "100%",
-    height: 50,
+    minHeight: 50,
     backgroundColor: '#fff',
     borderRadius: 15,
     marginVertical: 5,
@@ -200,7 +212,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "90%",
-    height: 50,
+    minHeight: 50,
     backgroundColor: '#fff',
     borderRadius: 15,
     paddingHorizontal: 15,
@@ -231,9 +243,9 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   cardReceita: {
-    alignItems: 'center',
-    justifyContent: 'center',
     width: "80%",
+    alignSelf: "center",
+    alignItems: "center",
     backgroundColor: "#D78387",
     borderRadius: 15,
     padding: 10,
@@ -242,14 +254,50 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   blocoBranco: {
+    width: "100%",
     backgroundColor: '#fff',
     borderRadius: 15,
-    paddingHorizontal: 15,
+    padding: 10,
     textAlignVertical: 'top',
     fontSize: 15,
   },
   tituloReceita: {
+    color: "#866f70",
     fontWeight: "600",
-    fontSize: 15,
+    fontSize: 16,
+    flexWrap: "wrap"
+  },
+  subtitulos: {
+    color: "#664a4c",
+    flexWrap: "wrap",
+    fontWeight: "500",
+  },
+  botaoRemover: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: 7,
+    backgroundColor: "#D78387",
+    borderRadius: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#ffffff",
+  },
+  textoBotaoRemover: {
+    color: "#ffffff",
+    fontWeight: "600",
+  },
+  containerVazio: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
+  textoVazio: {
+    textAlign: "center",
+    color: "#866f70",
+    marginTop: 30,
+    fontSize: 14,
+    fontWeight: "500"
   },
 });
