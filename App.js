@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   },
   inputTitulo: {
     width: "100%",
-    height: 50,
+    minHeight: 50,
     backgroundColor: '#fff',
     borderRadius: 15,
     marginVertical: 5,
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
   },
   input: {
     width: "90%",
-    height: 50,
+    minHeight: 50,
     backgroundColor: '#fff',
     borderRadius: 15,
     paddingHorizontal: 15,
@@ -268,8 +268,9 @@ const styles = StyleSheet.create({
     flexWrap: "wrap"
   },
   subtitulos: {
-    color: "#866f70",
-    flexWrap: "wrap"
+    color: "#664a4c",
+    flexWrap: "wrap",
+    fontWeight: "500",
   },
   botaoRemover: {
     alignItems: 'center',
