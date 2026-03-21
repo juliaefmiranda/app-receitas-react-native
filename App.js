@@ -11,23 +11,29 @@ import {
 } from "react-native";
 
 export default function App() {
-  const [novaReceita, setNovaReceita] = useState("");
+  const [titulo, setTitulo] = useState("");
+  const [ingredientes, setIngredientes] = useState("");
+  const [modoPreparo, setModoPreparo] = useState("");
 
   const [listaReceitas, setListaReceitas] = useState([]);
 
   //Função para adicionar receita (spread operator)
   const adicionarReceita = () => {
-    if (novaReceita.trim() === "") return;
+    if (titulo.trim() === "") return;
 
     const receitaObjeto = {
       id: String(Date.now()),
-      texto: novaReceita,
+      titulo,
+      ingredientes,
+      modoPreparo,
     };
 
     //Pega tudo que já tinha lista (...listaReceitas) e joga o novo item no final
     setListaReceitas([...listaReceitas, receitaObjeto]);
 
-    setNovaReceita("");
+    setTitulo("");
+    setIngredientes("");
+    setModoPreparo("");
   };
 
   //Função para remover receita (filter)
@@ -56,24 +62,24 @@ export default function App() {
             style={styles.inputTitulo}
             placeholder="O que vamos cozinhar hoje?"
             placeholderTextColor="#949393"
-            value={novaReceita}
-            onChangeText={setNovaReceita}
+            value={titulo}
+            onChangeText={setTitulo}
             multiline={true}
           />
           <TextInput
             style={styles.input}
             placeholder="Ingredientes ..."
             placeholderTextColor="#949393"
-            value={novaReceita}
-            onChangeText={setNovaReceita}
+            value={ingredientes}
+            onChangeText={setIngredientes}
             multiline={true}
           />
           <TextInput
             style={styles.input}
             placeholder="Modo de Preparo ..."
             placeholderTextColor="#949393"
-            value={novaReceita}
-            onChangeText={setNovaReceita}
+            value={modoPreparo}
+            onChangeText={setModoPreparo}
             multiline={true}
           />
           <TouchableOpacity
